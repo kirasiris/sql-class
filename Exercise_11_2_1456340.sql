@@ -34,24 +34,28 @@ go
 CREATE database MyWebDB;
 go
 
-create table Users
-(UserID			int			not null primary key,
-EmailAddress		varchar(50)		null,
-FirstName		varchar(50)		null,
-LastName		varchar(50)		null);
+CREATE TABLE Users
+(UserID			int		NOT NULL PRIMARY KEY,
+EmailAddress	varchar(50)	NULL,
+FirstName		varchar(50)	NULL,
+LastName		varchar(50)	NULL);
 
-create table Products
-(ProductID		int			not null primary key,
-ProductName		varchar(50)		null);
+CREATE TABLE Products
+(ProductID		int			NOT NULL PRIMARY KEY,
+ProductName		varchar(50)		NULL);
 
-create table Downloads
-(DownloadID		int			not null primary key,
-UserID			int			not null references Users (UserID),
-DownloadDate		smalldatetime		null,
-FileName		varchar(50)		null,
-ProductID		int			not null references Products (ProductID));
+CREATE TABLE Downloads
+(DownloadID		int				NOT NULL PRIMARY KEY,
+UserID			int				NOT NULL REFERENCES Users (UserID),
+DownloadDate	smalldatetime		NULL,
+FileName		varchar(50)			NULL,
+ProductID		int				NOT NULL REFERENCES Products (ProductID));
 
-create index IX_Downloads_UserID
-on Downloads (UserID);
-create index IX_Downloads_ProductID
-on Downloads (ProductID);
+CREATE INDEX
+	IX_Downloads_UserID
+ON
+	Downloads (UserID);
+CREATE INDEX
+	IX_Downloads_ProductID
+ON
+	Downloads (ProductID);
